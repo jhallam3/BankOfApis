@@ -3,24 +3,6 @@ using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
 
-namespace BlueBank.Tests
-{
-    [TestClass()]
-    public class UnitTest1
-    {
-        [TestMethod()]
-        public async Task Auth2AsyncTestAsync()
-        {
-            var f = new BlueBank.Auth();
-            var d = await f.Auth2Async();
-            Assert.Fail();
-        }
-
-
-
-
-    }
-}
 
 namespace BlueBank.Test
 {

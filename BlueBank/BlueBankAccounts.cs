@@ -10,6 +10,7 @@ using BlueBank.DataTypes.Account;
 using BlueBank.DataTypes.Customer;
 using BlueBank.DataTypes.Payment;
 using BlueBank.DataTypes.Transactions;
+using BlueBank.DataTypes.WebHooks;
 using Newtonsoft.Json;
 
 namespace BlueBank
@@ -213,6 +214,123 @@ namespace BlueBank
             }
 
         }
+
+        public async Task<ClassWebHookFilter[]> GetWebHookFilters_GetAll(string Ocp, string Auth)
+        {
+
+            try
+            {
+                var client = new HttpClient();
+                var queryString = HttpUtility.ParseQueryString(string.Empty);
+
+              
+                client.DefaultRequestHeaders.Add("Authorization", Auth);
+                client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", Ocp);
+
+                var uri = "https://bluebank.azure-api.net/v0.7/api/WebHookFilters";
+
+
+                var response = await client.GetStringAsync(uri);
+                var result = JsonConvert.DeserializeObject<List<ClassWebHookFilter>>(response);
+
+
+                return result.ToArray(); 
+            }
+            catch (Exception ex2)
+            {
+
+                throw;
+            }
+
+        }
+
+        public async Task<WebHookRegister[]> GetWebHookRegistrations_GetAllForCustomer(string Ocp, string Auth)
+        {
+
+            try
+            {
+                var client = new HttpClient();
+                var queryString = HttpUtility.ParseQueryString(string.Empty);
+
+
+                client.DefaultRequestHeaders.Add("Authorization", Auth);
+                client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", Ocp);
+
+                var uri = "https://bluebank.azure-api.net/v0.7/api/WebHookRegistrations";
+
+
+                var response = await client.GetStringAsync(uri);
+                var result = JsonConvert.DeserializeObject<List<WebHookRegister>>(response);
+
+
+                return result.ToArray();
+            }
+            catch (Exception ex2)
+            {
+
+                throw;
+            }
+
+        }
+
+        public async Task<WebHookRegister[]> GetWebHookRegistrations_GetById(string Ocp, string Auth, string id)
+        {
+
+            try
+            {
+                var client = new HttpClient();
+                var queryString = HttpUtility.ParseQueryString(string.Empty);
+
+
+                client.DefaultRequestHeaders.Add("Authorization", Auth);
+                client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", Ocp);
+
+                var uri = "https://bluebank.azure-api.net/v0.7/api/WebHookRegistrations/"+id;
+
+
+                var response = await client.GetStringAsync(uri);
+                var result = JsonConvert.DeserializeObject<List<WebHookRegister>>(response);
+
+
+                return result.ToArray();
+            }
+            catch (Exception ex2)
+            {
+
+                throw;
+            }
+
+        }
+
+        public async Task<HttpResponseMessage> PostWebHookRegistrations_Create(string Ocp, string Auth, WebHookRegister Webhook)
+        {
+
+            try
+            {
+                var client = new HttpClient();
+                var queryString = HttpUtility.ParseQueryString(string.Empty);
+
+                
+                client.DefaultRequestHeaders.Add("Authorization", Auth);
+                client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", Ocp);
+
+                var uri = "https://bluebank.azure-api.net/v0.7/api/WebHookRegistrations";
+
+
+                var stringContent = new StringContent(JsonConvert.SerializeObject(Webhook), Encoding.UTF8, "application/json");
+                var response2 = await client.PostAsync(uri, stringContent);
+
+
+                return response2;
+            }
+            catch (Exception ex2)
+            {
+
+                throw;
+            }
+
+        }
+
 
 
 

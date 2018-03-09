@@ -49,6 +49,9 @@
     <Compile Include="DataTypes\Customer\Customer.cs" />
     <Compile Include="DataTypes\Payment\Payment.cs" />
     <Compile Include="DataTypes\Transactions\Transactions.cs" />
+    <Compile Include="DataTypes\WebHooks\WebhookFilters.cs" />
+    <Compile Include="DataTypes\WebHooks\WebHookRegister.cs" />
+    <Compile Include="DataTypes\WebHooks\WebHookRegisterResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

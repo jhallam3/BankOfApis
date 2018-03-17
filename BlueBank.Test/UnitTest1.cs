@@ -97,7 +97,7 @@ namespace BlueBank.Test
         public async Task GetWebHookRegistrations_GetAllForCustomer()
         {
             var f = new BlueBank.BlueBankAccounts();
-            var r = await f.GetWebHookRegistrations_GetAllForCustomer(ocp, auth);
+            var r = await f.GetWebHookRegistrations_GetAllForCustomers(ocp, auth);
         }
 
         [TestMethod]

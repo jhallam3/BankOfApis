@@ -17,17 +17,17 @@ namespace BlueBank
 {
     public class BlueBankAccounts
     {
-        public async Task<string> GetAccountByCustomerIdAsync(string Ocp, string Auth)
+        public async Task<string> GetAccountsByAccountIdAsync(string Ocp, string Auth, string AccountID)
         {
             var client = new HttpClient();
             var queryString = HttpUtility.ParseQueryString(string.Empty);
 
             // Request headers
-            client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", "");
+            //client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", "");
             client.DefaultRequestHeaders.Add("Authorization", Auth);
             client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", Ocp);
 
-            var uri = "https://bluebank.azure-api.net/api/v0.7/accounts/{id}?" + queryString;
+            var uri = "https://bluebank.azure-api.net/api/v0.7/accounts/"+AccountID;
 
             var response = await client.GetAsync(uri);
             return response.Content.ToString();
@@ -244,7 +244,7 @@ namespace BlueBank
 
         }
 
-        public async Task<WebHookRegister[]> GetWebHookRegistrations_GetAllForCustomer(string Ocp, string Auth)
+        public async Task<WebHookRegister[]> GetWebHookRegistrations_GetAllForCustomers(string Ocp, string Auth)
         {
 
             try
@@ -273,7 +273,7 @@ namespace BlueBank
 
         }
 
-        public async Task<WebHookRegister[]> GetWebHookRegistrations_GetById(string Ocp, string Auth, string id)
+        public async Task<WebHookRegister> GetWebHookRegistrations_GetByWebhookId(string Ocp, string Auth, string Webhookid)
         {
 
             try
@@ -285,14 +285,14 @@ namespace BlueBank
                 client.DefaultRequestHeaders.Add("Authorization", Auth);
                 client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", Ocp);
 
-                var uri = "https://bluebank.azure-api.net/v0.7/api/WebHookRegistrations/"+id;
+                var uri = "https://bluebank.azure-api.net/v0.7/api/WebHookRegistrations/"+Webhookid;
 
 
                 var response = await client.GetStringAsync(uri);
-                var result = JsonConvert.DeserializeObject<List<WebHookRegister>>(response);
+                var result = JsonConvert.DeserializeObject<WebHookRegister>(response);
 
 
-                return result.ToArray();
+                return result;
             }
             catch (Exception ex2)
             {

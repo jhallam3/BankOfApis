@@ -14,7 +14,7 @@ namespace BlueBank.DataTypes.WebHooks
         public string webHookUri { get; set; }
         public string secret { get; set; }
         public string description { get; set; }
-        public List<string> filters { get; set; }
+        public string[] filters { get; set; }
     }
 
 }

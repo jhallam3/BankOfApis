@@ -136,7 +136,7 @@ namespace BlueBank.Test
 
             List<string> filters = new List<string>();
             filters.Add("*");
-            webhook.filters = filters;
+            webhook.filters =  filters.ToArray();
             webhook.webHookUri = "http://example.io";
             var r = await f.PostWebHookRegistrations_Create(ocp, auth, webhook);
         }

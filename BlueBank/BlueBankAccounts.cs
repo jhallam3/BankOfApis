@@ -185,11 +185,13 @@ namespace BlueBank
 
         }
 
-        public async Task<HttpResponseMessage> PaymentCreate(string Ocp, string Auth, BlueBank.DataTypes.Payment.Payment Payment)
+        public async Task<HttpResponseMessage> PaymentCreate(string Ocp, string Auth, BlueBank.DataTypes.Payment.Payment payment)
         {
 
             try
             {
+                
+
                 var client = new HttpClient();
                 var queryString = HttpUtility.ParseQueryString(string.Empty);
 
@@ -201,7 +203,7 @@ namespace BlueBank
                 var uri = "https://bluebank.azure-api.net/v0.71/api/Payments" ;
                 
 
-                var stringContent = new StringContent(JsonConvert.SerializeObject(Payment), Encoding.UTF8, "application/json");
+                var stringContent = new StringContent(JsonConvert.SerializeObject(payment), Encoding.UTF8, "application/json");
                 var response2 = await client.PostAsync(uri, stringContent);
 
                 
@@ -332,7 +334,34 @@ namespace BlueBank
         }
 
 
+        public async Task<HttpResponseMessage> WebHookRegistrations_Delete(string Ocp, string Auth, string Webhookid)
+        {
 
+            try
+            {
+                var client = new HttpClient();
+                var queryString = HttpUtility.ParseQueryString(string.Empty);
+
+
+                client.DefaultRequestHeaders.Add("Authorization", Auth);
+                client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", Ocp);
+
+                var uri = "https://bluebank.azure-api.net/v0.7/api/WebHookRegistrations/" + Webhookid;
+
+
+                
+                var response2 = await client.DeleteAsync(uri);
+
+
+                return response2;
+            }
+            catch (Exception ex2)
+            {
+
+                throw;
+            }
+
+        }
 
     }
 

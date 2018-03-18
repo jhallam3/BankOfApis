@@ -1,6 +1,8 @@
-﻿using System;
+﻿using DecisionsFramework.Design.Flow;
+using System;
 namespace BlueBank
 {
+    [AutoRegisterMethodsOnClass(true, "Open Banking", "Bank Of Apis / Blue Bank", RegisterForAgents = true)]
     public class BlueBankForDecisions
     {
         public String GetAccountByAccountIdAsync(string ocp, string auth, string accountid)
@@ -128,7 +130,33 @@ namespace BlueBank
             }
         }
 
+        public System.Net.Http.HttpResponseMessage PaymentCreate(string ocp, string auth, DataTypes.Payment.Payment payment)
+        {
+            try
+            {
+                var f = new BlueBank.BlueBankAccounts().PaymentCreate(ocp, auth, payment).Result;
 
+                return f;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public System.Net.Http.HttpResponseMessage PostWebHookRegistrations_Create(string ocp, string auth, DataTypes.WebHooks.WebHookRegister Webhook)
+        {
+            try
+            {
+                var f = new BlueBankAccounts().PostWebHookRegistrations_Create(ocp, auth, Webhook).Result;
+
+                return f;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
 
     }
 }
